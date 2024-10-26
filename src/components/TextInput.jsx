@@ -3,6 +3,7 @@ import style from './TextInput.module.css'
 
 export default function TextInput ({placeholder, maxLength, ...props}){
   const [text, setText] = useState('');
+  const [tweeList, setTweeList] = useState([])
 
   function onTextChange(event){
     const text = event.target.value;
@@ -10,8 +11,13 @@ export default function TextInput ({placeholder, maxLength, ...props}){
       setText(text);
     }
   }
+
+  function sentTweet(){
+    setTweeList([...tweeList, text]);
+  }
+
   return (
-    <div>
+    <div> 
       <textarea 
         className={style.input}
         placeholder={placeholder}
@@ -20,6 +26,10 @@ export default function TextInput ({placeholder, maxLength, ...props}){
       {...props}
       />
       <p>{text.length} / {maxLength}</p>
+      <button onClick={sentTweet}>Enviar</button>
+      {tweeList.map(twee => {
+        return (<p key={twee}>{twee}</p>)
+      })}      
     </div>
   );
 }
