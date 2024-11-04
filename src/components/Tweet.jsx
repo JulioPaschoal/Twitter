@@ -1,16 +1,23 @@
+/* eslint-disable react/prop-types */
+import { formatDistanceToNow } from 'date-fns'
+import { ptBR } from 'date-fns/locale';
 import styles from './Tweet.module.css'
 
-export default function Tweet(props) {
+export default function Tweet({tweet}) {
+  const publishedToNew = formatDistanceToNow(new Date(tweet.date), {
+    locale: ptBR,
+    addSuffix: true,
+  });
   return (
     <div className={styles.tweetContainer}>
-      <img className={styles.avatar} src={'http://github.com/juliopaschoal.png'} />
+      <img className={styles.avatar} src={tweet.user.picture} />
       <div className={styles.user}>
-        <span className={styles.userName}>Julio Paschoal</span>
-        <span className={styles.userUserName}>@juliopaschoal</span>
-        <span className={styles.date}>20 minutos atrás</span>
+        <span className={styles.userName}>{tweet.user.name}</span>
+        <span className={styles.userUserName}>{tweet.user.username}</span>
+        <span className={styles.userUserName}>- {publishedToNew}</span>
       </div>
       <div className={styles.tweetText}>
-      {props.children}
+      {tweet.text}
       </div>
     </div>
   )

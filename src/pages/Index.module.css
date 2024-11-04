@@ -42,3 +42,17 @@
 .postButton:hover {
   opacity: 0.9;
 }
+
+.tweetList {
+  list-style-type: none;
+  margin: 32px 0;
+  padding: 0;
+}
+
+.tweetListItem {
+  padding: 16px 0;
+
+}
+.tweetListItem:not(:last-child) {
+  border-bottom: 1px solid var(--border);
+}

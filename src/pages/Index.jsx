@@ -8,6 +8,17 @@ export default function Index() {
   const [tweeList, setTweeList] = useState([])
   const maxLength = 125;
 
+  const tweet = {
+    date: new Date(),
+    text: text,
+    user: {
+      name: 'Julio Paschoal',
+      username: '@juliopaschoal',
+      picture: 'http://github.com/juliopaschoal.png'
+    },
+
+  }
+
   function onTextChange(event){
     const text = event.target.value;
     if (text.length <= maxLength) {
@@ -16,9 +27,8 @@ export default function Index() {
   }
 
   function sentTweet(){
-    setTweeList([...tweeList, text]);
+    setTweeList([...tweeList, tweet]);
   }
-
 
   return (
     <div>
@@ -36,10 +46,12 @@ export default function Index() {
       <div>{text.length} / {maxLength}</div>
       <button className={styles.postButton} onClick={sentTweet}>Tweetar</button>
     </div>
-    <ul>
-        {tweeList.map(twee => {
+    <ul className={styles.tweetList}>
+        {tweeList.map(tweet => {
           return (
-            <li><Tweet children={twee} key={twee} /></li>
+            // eslint-disable-next-line react/jsx-key
+            <li className={styles.tweetListItem}>
+              <Tweet tweet={tweet}/></li>
           )
         })} 
     </ul>
